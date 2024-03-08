@@ -7,24 +7,30 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl implements AccountService {
 
 	@Autowired
-	private AccountRepository repo;
+	private AccountRepository repoAccounts;
+	
+	@Autowired
+	private AgendaRepository repoAgendas;
 
 	@Override
 	public void init() {
-		repo.save(new Account("Hugo", "Dupont", "mail@mail.fr", "mdp"));
-
+		Account a = new Account("Hugo", "Dupont", "a@a.a", "mdp");
+		repoAccounts.save(a);
+		Agenda aa = new Agenda("test",a);
+		repoAgendas.save(aa);
+		
 	}
 
 	@Override
 	public void ajouterCompte(String nom, String prenom, String mail, String mdp) {
-		repo.save(new Account(nom, prenom, mail, mdp));
+		repoAccounts.save(new Account(nom, prenom, mail, mdp));
 	}
 
 	@Override
 	public Account getAccount(String mail, String mdp){
 		
 		try {
-		Account a = repo.findById(mail).get();
+		Account a = repoAccounts.findById(mail).get();
 		if(a.getMdp().equals(mdp)) return a;
 		return null;
 			

@@ -11,17 +11,30 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Account {
 	
-	private long id;
+
+	
+
 	private String nom;
 	private String prenom;
 	private String mail;
 	private String mdp;
 	
+	@OneToMany
+	(cascade=CascadeType.ALL)
+	private List<Agenda> agendas;
 	
 	
 	public Account() {
 		super();
 
+	}
+	public Account(String nom, String prenom, String mail, String mdp, List<Agenda> agendas) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.mail = mail;
+		this.mdp = mdp;
+		this.agendas = agendas;
 	}
 	
 	public Account(String nom, String prenom,String mail, String mdp) {
@@ -63,6 +76,14 @@ public class Account {
 
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
+	}
+
+	public List<Agenda> getAgendas() {
+		return agendas;
+	}
+
+	public void setAgendas(List<Agenda> agendas) {
+		this.agendas = agendas;
 	}
 
 

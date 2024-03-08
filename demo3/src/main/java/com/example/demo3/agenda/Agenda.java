@@ -9,16 +9,34 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Agenda {
 	
+
+
+
+
 	private long id;
 	private String name;
 	
-	
+	@ManyToOne
+	(cascade=CascadeType.ALL)
+	private Account account;
 	
 
 	public Agenda() {
 		super();
 	}
 	
+	public Agenda(String name) {
+		super();
+		this.name = name;
+		this.account = null;
+	}
+	
+	public Agenda(String name, Account account) {
+		super();
+		this.id=id;
+		this.name = name;
+		this.account = account;
+	}
 	
 
 	@Id
@@ -40,6 +58,18 @@ public class Agenda {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+
+
+	public Account getAccount() {
+		return account;
+	}
+
+
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 
