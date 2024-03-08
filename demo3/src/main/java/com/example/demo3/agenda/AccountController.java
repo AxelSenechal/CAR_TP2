@@ -1,4 +1,4 @@
-package com.example.demo3.bib;
+package com.example.demo3.agenda;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,18 +7,38 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping("/bib")
-public class AuteurController {
+@RequestMapping("/agenda")
+public class AccountController {
 	
 	@Autowired
-	private AuteurService service;
+	private AccountService service;
+	
 	
 	@GetMapping("/home")
 	public String home(Model model) {
-		Iterable<Auteur> auteurs = service.getAllAuteurs();
+		
+		return "/agenda/home";
+	}
+	
+	@PostMapping("/add")
+	public String add(@RequestParam String nom, @RequestParam String prenom, @RequestParam String mail,@RequestParam String mdp) {
+		service.ajouterCompte(prenom, prenom, mail, mdp);
+		return "redirect:/agenda/home";
+	}
+	
+	@PostMapping("/login")
+	public String login(@RequestParam String mail,@RequestParam String mdp) {
+		
+		return "redirect:/agenda/home";
+	}
+	
+	/*@GetMapping("/home")
+	public String home(Model model) {
+		Iterable<Account> auteurs = service.getAllAuteurs();
 		model.addAttribute("auteurs",auteurs);
 		return "/bib/home";
 	}
@@ -41,6 +61,6 @@ public class AuteurController {
 		service.retirerAuteur(id);
 		return "redirect:/bib/home";
 
-	}
+	}*/
 
 }

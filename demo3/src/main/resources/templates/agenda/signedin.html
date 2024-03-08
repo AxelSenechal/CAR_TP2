@@ -1,0 +1,16 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<body>
+	<h1>Liste des agendas</h1>
+	<table border="1">
+		<tr>
+			<th>Id</th>
+			<th>Nom</th>
+		</tr>
+		<tr th:each="agenda : ${agendas}">
+			<td th:text="${agenda.id}" />
+			<td th:text="${agenda.nom}" />
+		</tr>
+	</table>
+
+</body>
+</html>

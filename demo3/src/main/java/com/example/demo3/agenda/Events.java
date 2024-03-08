@@ -1,26 +1,30 @@
-package com.example.demo3.bib;
+package com.example.demo3.agenda;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class Auteur {
+public class Events {
 	
 	private long id;
 	private String nom;
 	private String prenom;
+	private String mail;
+	private String mdp;
 	
-	public Auteur() {
+	public Events() {
 		super();
 
 	}
 	
-	public Auteur(String nom, String prenom) {
+	public Events(String nom, String prenom,String mail, String mdp) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.mdp = mdp;
+		this.mail = mail;
 	}
 
 	@Id
@@ -42,6 +46,22 @@ public class Auteur {
 	}
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getMdp() {
+		return mdp;
+	}
+
+	public void setMdp(String mdp) {
+		this.mdp = mdp;
 	}
 	
 	
