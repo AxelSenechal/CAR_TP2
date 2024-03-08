@@ -26,7 +26,7 @@ public class Account {
 	
 	public Account(String nom, String prenom,String mail, String mdp) {
 		super();
-		this.id = id;
+		
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mdp = mdp;
@@ -35,12 +35,12 @@ public class Account {
 	}
 
 	@Id
-	@GeneratedValue
-	public long getId() {
-		return id;
+	public String getMail() {
+		return mail;
 	}
-	public void setId(long id) {
-		this.id = id;
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 	public String getNom() {
 		return nom;
@@ -55,13 +55,7 @@ public class Account {
 		this.prenom = prenom;
 	}
 
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
+	
 
 	public String getMdp() {
 		return mdp;

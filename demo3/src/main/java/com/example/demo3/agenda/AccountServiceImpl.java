@@ -11,35 +11,41 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void init() {
-		repo.save(new Account("Hugo", "Dupont", "mail@mail.fr","mdp"));
+		repo.save(new Account("Hugo", "Dupont", "mail@mail.fr", "mdp"));
 
 	}
 
 	@Override
 	public void ajouterCompte(String nom, String prenom, String mail, String mdp) {
-		repo.save(new Account(nom, prenom,mail, mdp));
-	}
-	
-	@Override
-	public Iterable<Account> getAccount(String mail, String mdp){
-		return null;
-	}
-
-	
-	/*
-	@Override
-	public Iterable<Personne> getAllAuteurs() {
-
-		return repo.findAll();
+		repo.save(new Account(nom, prenom, mail, mdp));
 	}
 
 	@Override
-	public void retirerAuteur(String id) {
-		System.out.println("--------------------------------\nID: "+id+"--------------------------------\n");
-		repo.deleteById((long) Integer.parseInt(id));
+	public Account getAccount(String mail, String mdp){
 		
-	}*/
-	
-	
+		try {
+		Account a = repo.findById(mail).get();
+		if(a.getMdp().equals(mdp)) return a;
+		return null;
+			
+		}
+		catch (Exception e) {
+			return null;
+		}
+		
+	}
+
+	/*
+	 * @Override public Iterable<Personne> getAllAuteurs() {
+	 * 
+	 * return repo.findAll(); }
+	 * 
+	 * @Override public void retirerAuteur(String id) {
+	 * System.out.println("--------------------------------\nID: "+id+
+	 * "--------------------------------\n"); repo.deleteById((long)
+	 * Integer.parseInt(id));
+	 * 
+	 * }
+	 */
 
 }

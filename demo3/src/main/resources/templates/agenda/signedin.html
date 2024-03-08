@@ -1,6 +1,6 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <body>
-	<h1>Liste des agendas</h1>
+	<h1>Liste des agendas de <a th:text="${account.nom}"></a></h1> 
 	<table border="1">
 		<tr>
 			<th>Id</th>
@@ -12,5 +12,9 @@
 		</tr>
 	</table>
 
+
+<form action="/agenda/home">
+		<br><input type="submit" value = "Déconnexion">
+</form>
 </body>
 </html>

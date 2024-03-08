@@ -7,7 +7,7 @@ public interface AccountService {
 	
 	void ajouterCompte(String nom, String prenom, String mail, String mdp);
 
-	Iterable<Account> getAccount(String mail, String mdp);
+	Account getAccount(String mail, String mdp);
 	
 
 }
