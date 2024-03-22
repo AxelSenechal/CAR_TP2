@@ -1,4 +1,4 @@
-package com.example.demo3.agenda;
+package com.example.demo3.account;
 
 
 public interface AccountService {

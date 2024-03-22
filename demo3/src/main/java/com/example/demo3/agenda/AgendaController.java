@@ -8,36 +8,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo3.account.Account;
+import com.example.demo3.account.AccountService;
+
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/agenda")
-public class AccountController {
+public class AgendaController {
 
 	@Autowired
-	private AccountService service;
+	private AccountService serviceAccount;
 
-	@GetMapping("/home")
-	public String home(Model model) {
+	@Autowired
+	private AgendaService serviceAgenda;
 
-		return "/agenda/home";
-	}
 
-	@PostMapping("/add")
-	public String add(@RequestParam String nom, @RequestParam String prenom, @RequestParam String mail,
-			@RequestParam String mdp) {
-		service.ajouterCompte(prenom, prenom, mail, mdp);
-		return "redirect:/agenda/home";
-	}
 
-	@PostMapping("/login")
-	public String login(Model model, @RequestParam String mail, @RequestParam String mdp) {
-		Account a = service.getAccount(mail, mdp);
-		if (a != null) {
-			model.addAttribute("account", a);
-			return "/agenda/signedin";
-		}
-
-		return "redirect:/agenda/home";
-	}
+	@PostMapping("/create")
+	public String create(HttpSession session, @RequestParam String nom) {
+      
+		serviceAgenda.addAgenda(nom, ((Account) session.getAttribute("account")).getMail());
+		return "redirect:/agenda/signin";
+    }
 
 	/*
 	 * @GetMapping("/home") public String home(Model model) { Iterable<Account>

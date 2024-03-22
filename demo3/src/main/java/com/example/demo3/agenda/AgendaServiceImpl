@@ -1,0 +1,48 @@
+package com.example.demo3.agenda;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AgendaServiceImpl implements AgendaService {
+
+    @Autowired
+	private AgendaRepository repoAgendas;
+
+    @Autowired
+    private AccountRepository repoAccounts;
+
+	@Override
+	public void init() {
+		Agenda a = new Agenda("agenda1");
+		repoAccounts.save(a);
+		
+	}
+
+	@Override
+	public void addAgenda(String nom, String mail) {
+        Account a = repoAccounts.findById(mail).get();
+        Agenda ag = new Agenda(nom);
+        ag.setAccount(a);
+        repoAgendas.save(ag);
+        repoAccounts.save(a);   
+    }
+
+	@Override
+	public Account getAgenda(Long id){
+        
+        try {
+        Agenda a = repoAgendas.findById(id).get();
+        return a.getAccount();
+            
+        }
+        catch (Exception e) {
+            return null;
+        }
+        
+    }
+
+   
+}

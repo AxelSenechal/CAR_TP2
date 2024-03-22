@@ -1,46 +1,55 @@
 package com.example.demo3.agenda;
 
-import jakarta.persistence.CascadeType;
+import com.example.demo3.account.Account;
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+
 
 @Entity
 public class Agenda {
 	
 
 
-
-
+	@Id
+	@GeneratedValue
 	private long id;
-	private String name;
+	private String nom;
+	
 	
 	@ManyToOne
-	(cascade=CascadeType.ALL)
+	@JoinColumn(name="mail")
 	private Account account;
 	
 
 	public Agenda() {
-		super();
-	}
-	
-	public Agenda(String name) {
-		super();
-		this.name = name;
-		this.account = null;
-	}
-	
-	public Agenda(String name, Account account) {
-		super();
-		this.id=id;
-		this.name = name;
-		this.account = account;
+		
 	}
 	
 
-	@Id
-	@GeneratedValue
+	public Agenda(String nom, Account account) {
+		
+		
+		this.nom = nom;
+		this.account = account;
+		if(!account.getAgendas().contains(this))
+			account.getAgendas().add(this);
+			
+	}
+	
+	public Agenda(String nom, String mail) {
+	
+	
+			this.nom = nom;
+			this.account = null;
+		}
+
+	
 	public long getId() {
 		return id;
 	}
@@ -48,16 +57,18 @@ public class Agenda {
 		this.id = id;
 	}
 
+	
 
 
-	public String getName() {
-		return name;
+
+	public String getNom() {
+		return nom;
 	}
 
 
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 
@@ -70,6 +81,8 @@ public class Agenda {
 
 	public void setAccount(Account account) {
 		this.account = account;
+		if(!account.getAgendas().contains(this))
+			account.getAgendas().add(this);	
 	}
 
 

@@ -1,23 +1,19 @@
-package com.example.demo3.agenda;
+package com.example.demo3.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private AccountRepository repoAccounts;
-	
-	@Autowired
-	private AgendaRepository repoAgendas;
 
 	@Override
 	public void init() {
 		Account a = new Account("Hugo", "Dupont", "a@a.a", "mdp");
 		repoAccounts.save(a);
-		Agenda aa = new Agenda("test",a);
-		repoAgendas.save(aa);
 		
 	}
 

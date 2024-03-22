@@ -1,6 +1,11 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <body>
-	<h1>Liste des agendas de <a th:text="${account.nom}"></a></h1> 
+	<h1>Liste des agendas de <a th:text="${session.account.nom}"></a></h1> 
+
+	<form action="/agenda/create" method="post">
+		<input type="text" name="nom" placeholder="Nom de l'agenda">
+		<input type="submit" value = "Créer un agenda">
+	</form>
 	<table border="1">
 		<tr>
 			<th>Id</th>
