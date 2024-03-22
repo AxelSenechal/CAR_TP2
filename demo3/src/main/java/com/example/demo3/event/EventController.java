@@ -57,4 +57,12 @@ public class EventController {
 
         return "/agenda/events_print_page";
     }
+
+    @GetMapping("/disconnect")
+    public String getMethodName(HttpSession session) {
+        System.out.println("disconnect");
+        session.invalidate();
+        return "agenda/home";
+    }
+    
 }
