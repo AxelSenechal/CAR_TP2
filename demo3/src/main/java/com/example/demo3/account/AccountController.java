@@ -24,7 +24,7 @@ public class AccountController {
 
 	@GetMapping("/home")
 	public String home(Model model) {
-
+		serviceAccount.init();
 		return "/agenda/home";
 	}
 

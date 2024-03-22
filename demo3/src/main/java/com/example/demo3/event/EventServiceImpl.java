@@ -30,17 +30,12 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public void addEvent(String libelle, String date, String mail, String nomAgenda, String horaire_debut,
+    public void addEvent(String libelle, String date, long id_agenda, String horaire_debut,
             String horaire_fin) {
-        Account a = repoAccounts.findById(mail).get();
-        ArrayList<Agenda> agendas = (ArrayList<Agenda>) repoAgendas.findAllByAccount(a);
-        for (Agenda agenda : agendas) {
-            if(agenda.getNom().equals(nomAgenda)){
-                Event e = new Event(libelle, date, horaire_debut, horaire_fin, agenda);
-                repoEvents.save(e);
-                repoAgendas.save(agenda);
-            }
-        }
+        Agenda a = repoAgendas.findById(id_agenda).get();
+        Event e = new Event(libelle, date, horaire_debut, horaire_fin, a);
+        repoEvents.save(e);
+
     
     
     }
@@ -53,6 +48,8 @@ public class EventServiceImpl implements EventService{
     @Override
     public List<Event> getEventsByAgenda(long idAgenda) {
         Agenda a = repoAgendas.findById(idAgenda).get();
+        List<Event> events = new ArrayList<Event>();
+        events.addAll((List<Event>) repoEvents.findAllByAgenda(a));
         return (List<Event>) repoEvents.findAllByAgenda(a);
     }
     

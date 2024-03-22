@@ -11,11 +11,12 @@
 			<th>Id</th>
 			<th>Nom</th>
 		</tr>
+		
 		<tr th:each="agenda : ${agendas}">
-			<form action="/agenda/show_events_from_agenda" method="POST">
+			<form action="/agenda/agenda_save" method="POST">
 			<td th:text="${agenda.id}" />
 			<td th:text="${agenda.nom}" />
-			<input type="hidden" name="agenda_id" th:value="${agenda.id}" />
+			<input type="hidden" name="id_agenda" th:value="${agenda.id}" />
 			<td><input type="submit" value="Voir les événements" /></td>
 			</form>
 		</tr>
