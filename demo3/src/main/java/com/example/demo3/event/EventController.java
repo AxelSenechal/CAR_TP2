@@ -21,8 +21,10 @@ public class EventController {
     private EventService serviceEvent;
     
     @PostMapping("/agenda_save")
-    public String saveAgenda(@RequestParam long id_agenda, HttpSession session){
+    public String saveAgenda(@RequestParam long id_agenda,@RequestParam String nom_agenda , HttpSession session){
        session.setAttribute("id_agenda", id_agenda);
+       session.setAttribute("nom_agenda", nom_agenda);
+       
         return "redirect:/agenda/show_events_from_agenda";
     }
 
@@ -47,5 +49,12 @@ public class EventController {
     public String deleteEvent(@RequestParam long id_event){
         serviceEvent.deleteEvent(id_event);
         return "redirect:/agenda/show_events_from_agenda";
+    }
+
+    @GetMapping("/print")
+    public String print(Model model, HttpSession session){
+        model.addAttribute("events",  serviceEvent.getEventsByAgenda((long) session.getAttribute("id_agenda")));
+
+        return "/agenda/events_print_page";
     }
 }

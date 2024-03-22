@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Events Dashboard</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            
+        }
+        
+        th, td {
+            border: 1px solid black;
+           
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Events Dashboard - Agenda: <a th:text="${session.nom_agenda}"></a> </h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Libelle</th>
+                <th>Date</th>
+                <th>Horaire début</th>
+                <th>Horaire fin</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="event : ${events}">
+                <td th:text="${event.id_event}"></td>
+                <td th:text="${event.libelle}"></td>
+                <td th:text="${event.date}"></td>
+                <td th:text="${event.horaire_debut}"></td>
+                <td th:text="${event.horaire_fin}"></td>
+                   
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

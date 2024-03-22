@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-    <h1>Events Dashboard</h1>
+    <h1>Events Dashboard - Agenda: <a th:text="${session.nom_agenda}"></a></h1>
     <table>
         <thead>
             <tr>
@@ -66,6 +66,8 @@
     </table>
 	</form>
 <br>
+
+<a href="/agenda/print" target="_blank">Imprimer</a>
     <a href="/agenda/dashboard">Retour</a>
 
 </body>
