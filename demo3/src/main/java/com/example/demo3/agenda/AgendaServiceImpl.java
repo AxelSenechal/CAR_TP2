@@ -36,7 +36,11 @@ public class AgendaServiceImpl implements AgendaService {
 	public List<Agenda> getAgendas(Account a) {
        
         return (List<Agenda>) repoAgendas.findAllByAccount(a);
+    
     }
+
+
+
 
    
 }

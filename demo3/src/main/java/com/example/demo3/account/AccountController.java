@@ -36,11 +36,11 @@ public class AccountController {
 	}
 
 	@PostMapping("/login")
-	public String login(HttpSession session, @RequestParam String mail, @RequestParam String mdp) {
+	public String login(HttpSession session, @RequestParam String mail, @RequestParam String mdp, Model model) {
 		Account account = serviceAccount.getAccount(mail, mdp);
 		if (account != null) {
 			session.setAttribute("account", account);
-			return "/agenda/signedin";
+			return "redirect:/agenda/dashboard";
 		}
 
 		return "redirect:/agenda/home";

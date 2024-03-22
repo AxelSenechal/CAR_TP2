@@ -30,27 +30,14 @@ public class AgendaController {
 	public String create(HttpSession session, @RequestParam String nom, Model model) {
       
 		serviceAgenda.addAgenda(nom, ((Account) session.getAttribute("account")).getMail());
-        model.addAttribute("agendas", serviceAgenda.getAgendas((Account) session.getAttribute("account")));
-		return "/agenda/signedin";
+        
+		return "redirect:/agenda/dashboard";
     }
 
-	/*
-	 * @GetMapping("/home") public String home(Model model) { Iterable<Account>
-	 * auteurs = service.getAllAuteurs(); model.addAttribute("auteurs",auteurs);
-	 * return "/bib/home"; }
-	 * 
-	 * @PostMapping("/add") public String add(@RequestParam String
-	 * nom, @RequestParam String prenom) { service.ajouterAuteur(nom, prenom);
-	 * return "redirect:/bib/home"; }
-	 * 
-	 * @PostMapping("/init") public String init() { service.init(); return
-	 * "redirect:/bib/home"; }
-	 * 
-	 * @PostMapping("/remove") public String remove(@RequestParam String id) {
-	 * System.out.print("Erasing id: "+id+"\n\n\n"); service.retirerAuteur(id);
-	 * return "redirect:/bib/home";
-	 * 
-	 * }
-	 */
+	@GetMapping("/dashboard")
+    public String dashboard(HttpSession session, Model model) {
+        model.addAttribute("agendas", serviceAgenda.getAgendas((Account) session.getAttribute("account")));
+        return "/agenda/signedin";
+    }
 
 }

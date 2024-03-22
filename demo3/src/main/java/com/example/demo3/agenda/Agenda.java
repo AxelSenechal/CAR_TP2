@@ -1,7 +1,9 @@
 package com.example.demo3.agenda;
 
-import com.example.demo3.account.Account;
+import java.util.List;
 
+import com.example.demo3.account.Account;
+import com.example.demo3.event.Event;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
@@ -25,7 +28,20 @@ public class Agenda {
 	@ManyToOne
 	@JoinColumn(name="mail")
 	private Account account;
+
+	@OneToMany(mappedBy = "agenda", cascade = jakarta.persistence.CascadeType.ALL)
+	private List<Event> events;
 	
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
 
 	public Agenda() {
 		
