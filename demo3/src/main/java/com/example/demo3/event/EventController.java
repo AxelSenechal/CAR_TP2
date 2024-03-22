@@ -42,4 +42,10 @@ public class EventController {
         serviceEvent.addEvent(libelle, date, id_agenda, horaire_debut, horaire_fin);
         return "redirect:/agenda/show_events_from_agenda";
     }
+
+    @PostMapping("/delete_event")
+    public String deleteEvent(@RequestParam long id_event){
+        serviceEvent.deleteEvent(id_event);
+        return "redirect:/agenda/show_events_from_agenda";
+    }
 }

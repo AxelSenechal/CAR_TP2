@@ -26,6 +26,7 @@
                 <th>Date</th>
                 <th>Horaire début</th>
                 <th>Horaire fin</th>
+                <th>Suppression</th>
             </tr>
         </thead>
         <tbody>
@@ -35,9 +36,16 @@
                 <td th:text="${event.date}"></td>
                 <td th:text="${event.horaire_debut}"></td>
                 <td th:text="${event.horaire_fin}"></td>
+                <td>
+                    <form action="/agenda/delete_event" method="post">
+                        <input type="hidden" name="id_event" th:value="${event.id_event}" />
+                        <input type="submit" value="Supprimer" />
+                    </form> </td>
             </tr>
         </tbody>
     </table>
+
+    <br><h1>Ajouter un événement</h1>
     <form action="/agenda/add_event" method="post">
         <table>
             <tr>
@@ -57,8 +65,8 @@
     </tr>
     </table>
 	</form>
-
-    <input type="submit" value = "Retour" action="/agenda/dashboard">
+<br>
+    <a href="/agenda/dashboard">Retour</a>
 
 </body>
 </html>
