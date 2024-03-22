@@ -1,6 +1,8 @@
 package com.example.demo3.agenda;
 
+import java.util.List;
 
+import com.example.demo3.account.Account;
 
 public interface AgendaService {
 	
@@ -8,7 +10,7 @@ public interface AgendaService {
 	
 	void addAgenda(String nom, String mail);
 
-	Agenda getAgenda(Long id);
+	public List<Agenda> getAgendas(Account account);
 	
 
 }

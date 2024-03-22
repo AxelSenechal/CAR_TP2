@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo3.account.Account;
+import com.example.demo3.account.AccountRepository;
+
 @Service
 public class AgendaServiceImpl implements AgendaService {
 
@@ -16,32 +19,23 @@ public class AgendaServiceImpl implements AgendaService {
 
 	@Override
 	public void init() {
-		Agenda a = new Agenda("agenda1");
-		repoAccounts.save(a);
+		
 		
 	}
 
 	@Override
 	public void addAgenda(String nom, String mail) {
         Account a = repoAccounts.findById(mail).get();
-        Agenda ag = new Agenda(nom);
+        Agenda ag = new Agenda(nom,a);
         ag.setAccount(a);
         repoAgendas.save(ag);
         repoAccounts.save(a);   
     }
 
 	@Override
-	public Account getAgenda(Long id){
-        
-        try {
-        Agenda a = repoAgendas.findById(id).get();
-        return a.getAccount();
-            
-        }
-        catch (Exception e) {
-            return null;
-        }
-        
+	public List<Agenda> getAgendas(Account a) {
+       
+        return (List<Agenda>) repoAgendas.findAllByAccount(a);
     }
 
    

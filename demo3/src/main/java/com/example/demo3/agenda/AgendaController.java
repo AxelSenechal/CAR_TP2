@@ -17,8 +17,9 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/agenda")
 public class AgendaController {
 
+    /*
 	@Autowired
-	private AccountService serviceAccount;
+	private AccountService serviceAccount;*/
 
 	@Autowired
 	private AgendaService serviceAgenda;
@@ -26,10 +27,11 @@ public class AgendaController {
 
 
 	@PostMapping("/create")
-	public String create(HttpSession session, @RequestParam String nom) {
+	public String create(HttpSession session, @RequestParam String nom, Model model) {
       
 		serviceAgenda.addAgenda(nom, ((Account) session.getAttribute("account")).getMail());
-		return "redirect:/agenda/signin";
+        model.addAttribute("agendas", serviceAgenda.getAgendas((Account) session.getAttribute("account")));
+		return "/agenda/signedin";
     }
 
 	/*
